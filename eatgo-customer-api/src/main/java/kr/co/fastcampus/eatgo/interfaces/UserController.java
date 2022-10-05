@@ -33,9 +33,9 @@ public class UserController {
 
         String email = resource.getEmail();
         String name = resource.getName();
-        String tset = resource.getPassword();
+        String test = resource.getPassword();
 
-        User user = userService.registerUser(email, name, tset);
+        User user = userService.registerUser(email, name, test);
 
         String url = "/users/"+ user.getId();
         return ResponseEntity.created(new URI(url)).body("{}");

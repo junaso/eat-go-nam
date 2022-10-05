@@ -32,22 +32,20 @@ class ReviewControllerTest {
 
 
     @Test
-    public void createWithValidAttributes() throws Exception {
+    public void createWithValidAttriutes() throws Exception {
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEwMDQsIm5hbWUiOiJKb2huIn0.8hm6ZOJykSINHxL-rf0yV882fApL3hyQ9-WGlJUyo2A";
 
-        given(reviewService.addReview(eq(1L),any())).willReturn(
-                Review.builder()
-                        .id(1004L)
-                        .build()
-        );
+        given(reviewService.addReview(1L, "John", 3, "Oishii")).willReturn(
+                Review.builder().id(1004L).build());
 
         mvc.perform(post("/restaurants/1/reviews")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content("{\"name\":\"JOKER\",\"score\":3,\"description\":\"Mat-it-da\"}"))
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"score\":3,\"description\":\"Oishii\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location", "/restaurants/1/reviews/1004"));
 
-        verify(reviewService).addReview(eq(1L),any());
-
+        verify(reviewService).addReview(eq(1L),eq("John"), eq(3), eq("Oishii"));
     }
 
     @Test
@@ -57,7 +55,7 @@ class ReviewControllerTest {
                 .content("{}"))
                 .andExpect(status().isBadRequest());
 
-        verify(reviewService, never()).addReview(eq(1L),any());
+        verify(reviewService, never()).addReview(any(), any(), any(), any());
 
     }
 }

@@ -13,7 +13,4 @@ public class EatgoCustomerApplication {
 		SpringApplication.run(EatgoCustomerApplication.class, args);
 	}
 
-
-
-
 }
