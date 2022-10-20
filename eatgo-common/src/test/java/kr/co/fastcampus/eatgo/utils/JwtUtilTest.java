@@ -1,14 +1,12 @@
 package kr.co.fastcampus.eatgo.utils;
 
 import io.jsonwebtoken.Claims;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 import static org.hamcrest.core.StringContains.containsString;
-import static org.junit.jupiter.api.Assertions.*;
 
 class JwtUtilTest {
 
@@ -24,7 +22,7 @@ class JwtUtilTest {
 
     @Test
     public void createToken() {
-        String token = jwtUtil.createToken(1004L, "John");
+        String token = jwtUtil.createToken(1004L, "John", null);
         assertThat(token, containsString("."));
     }
 
