@@ -91,7 +91,7 @@ public class RestaurantServiceTest {
 
     @Test
     public void updateRestaurant() {
-        Restaurant restaurant =Restaurant.builder()
+        Restaurant restaurant = Restaurant.builder()
                 .id(1004L)
                 .name("Bob zip")
                 .address("Seoul")
@@ -100,7 +100,7 @@ public class RestaurantServiceTest {
         given(restaurantRepository.findById(1004L))
                 .willReturn(Optional.of(restaurant));
 
-        restaurantService.updateRestaurant(1004L, "Sool Zip", "Busan");
+        restaurantService.updateRestaurant(1004L, 1L, "Sool zip", "Busan");
 
         assertThat(restaurant.getName(), is("Sool Zip"));
         assertThat(restaurant.getAddress(), is("Busan"));

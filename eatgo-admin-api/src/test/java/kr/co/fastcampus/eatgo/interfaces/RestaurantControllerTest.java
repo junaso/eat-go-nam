@@ -124,12 +124,13 @@ public class RestaurantControllerTest {
     public void updateWithValidData() throws Exception {
 
         mvc.perform(patch("/restaurants/1004")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(" {\"categoryId\":1,\"name\":\"JOKER Bar\",\"address\":\"Busan\"}")
-        )
-                    .andExpect(status().isOk());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"categoryId\":1,\"name\":\"JOKER Bar\"," +
+                        "\"address\":\"Busan\"}"))
+                .andExpect(status().isOk());
 
-        verify(restaurantService).updateRestaurant(1004L, "JOKER Bar", "Busan");
+        verify(restaurantService)
+                .updateRestaurant(1004L, 1L, "JOKER Bar", "Busan");
     }
 
     @Test
